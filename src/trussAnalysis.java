@@ -2,7 +2,9 @@
  * Truss Analysis
  * Brandon Berney
  * November 23 2015
- * [I have no idea what this is]
+ * im not becoming an engineer and am moving to the midwest so i dont have to deal with bridges, water, or mountains
+ * bridges make me slit my wrists and cry myself to sleep
+ * justin asked why i didnt kill myself over the weekend and suggested i go through with my plans :^) :-) :) :) :) (: (: (: (: (: (: (: (: (: (: :( im trapped in 2008
  */
 
 import java.util.Scanner;
@@ -47,11 +49,13 @@ public class trussAnalysis {
 		tension_d_in_df;
 
     public static void main(String[] args) {
-    	// Testing
-    	centerLoad = 20000;
-    	sectionWeight = 2000;
-    	structuralPairWeight = 500;
+    	/////////Testing///////////
+    	// centerLoad = 20000;
+    	// sectionWeight = 2000;
+    	// structuralPairWeight = 500;
+    	///////////////////////////
 
+		getInputs();
     	doEquations();
     	System.out.println(returnResults());
     }
@@ -69,9 +73,14 @@ public class trussAnalysis {
     }
 
     private static void doEquations() {
-    	double mathMagic = (1/Math.sqrt(3));
+    	// double mathMagic = (1/Math.sqrt(3));
+		double mathMagic = 0.57735;
+		// figure THESE out
+    	roadWeight = sectionWeight;
+    	structuralWeight = structuralPairWeight;
+    	// THESE ARE VERY IMPORTANT
 
-    	roadWeight = 0; // FIGURE THIS OUT
+
     	up_force_e_via_ed = 0.5 * (centerLoad + roadWeight);
     	up_force_d_via_de = -up_force_e_via_ed - structuralWeight;
     	up_force_d_via_cd = -up_force_d_via_de + structuralWeight;
@@ -102,8 +111,10 @@ public class trussAnalysis {
     }
 
     private static double getTension(boolean isPositive, double variable) {
-    	int negate = 1;
-    	double mathMagic = (2/Math.sqrt(3));
+    	int negate;
+    	// double mathMagic = (2/Math.sqrt(3));
+    	double mathMagic = 1.1547;
+
     	if (isPositive)
     		negate = 1;
     	else
@@ -112,7 +123,20 @@ public class trussAnalysis {
     }
 
     private static String returnResults() {
-    	String ourResults = "";
+    	String ourResults = String.format("Assumed center load in lbs: %f%n"
+    		+ "Assumed weight of one section of road in lbs: %f%n"
+    		+ "Assumed weight of structural pair in lbs: %f%n%n"
+    		+ "Support for half of bridge: %f%n%n"
+    		+ "Total tension in BD: %f lbs.%n"
+    		+ "Total tension in DF: %f lbs.%n"
+    		+ "Total tension in AB: %f lbs.%n"
+    		+ "Total tension in BC: %f lbs.%n"
+    		+ "Total tension in CD: %f lbs.%n"
+    		+ "Total tension in DE: %f lbs.%n"
+    		+ "Total tension in AC: %f lbs.%n"
+    		+ "Total tension in CE: %f lbs.%n", centerLoad, sectionWeight, structuralPairWeight,
+    		pierForce, tension_b_in_bd, tension_d_in_df, tension_a_in_ab, tension_b_in_bc,
+    		tension_c_in_cd, tension_d_in_de, tension_a_in_ac, tension_c_in_ce);
     	return ourResults;
     }
 }
